@@ -1,2 +1,2 @@
-include ':app'
+include ':sample-app'
 rootProject.name = "MVVM Retrofit Sample"
