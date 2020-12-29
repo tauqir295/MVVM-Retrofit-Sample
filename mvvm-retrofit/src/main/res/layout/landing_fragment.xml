@@ -6,6 +6,7 @@
     tools:context=".LandingFragment">
 
     <TextView
+        android:id="@+id/helloTv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Hello" />
