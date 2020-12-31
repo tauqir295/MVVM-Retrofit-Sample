@@ -2,7 +2,7 @@ package com.sample.mvvm.retrofit
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.mvvm.retrofit.LandingFragment
+import com.mvvm.retrofit.ui.LandingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
