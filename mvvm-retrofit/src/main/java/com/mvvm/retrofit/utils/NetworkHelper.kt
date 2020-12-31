@@ -1,4 +1,4 @@
-package com.sample.mvvm.retrofit.utils
+package com.mvvm.retrofit.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

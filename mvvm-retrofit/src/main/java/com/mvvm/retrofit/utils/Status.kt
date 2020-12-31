@@ -1,4 +1,4 @@
-package com.sample.mvvm.retrofit.utils
+package com.mvvm.retrofit.utils
 
 enum class Status {
     SUCCESS,

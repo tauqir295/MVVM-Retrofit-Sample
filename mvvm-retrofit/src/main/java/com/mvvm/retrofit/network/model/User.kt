@@ -1,4 +1,4 @@
-package com.sample.mvvm.retrofit.network.model
+package com.mvvm.retrofit.network.model
 
 import com.squareup.moshi.Json
 

@@ -1,9 +1,9 @@
-package com.sample.mvvm.retrofit.di
+package com.mvvm.retrofit.di
 
 import android.content.Context
-import com.sample.mvvm.retrofit.BuildConfig
-import com.sample.mvvm.retrofit.network.api.ApiService
-import com.sample.mvvm.retrofit.utils.NetworkHelper
+import com.mvvm.retrofit.BuildConfig
+import com.mvvm.retrofit.network.api.ApiService
+import com.mvvm.retrofit.utils.NetworkHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

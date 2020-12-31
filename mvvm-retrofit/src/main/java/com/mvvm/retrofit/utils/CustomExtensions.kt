@@ -2,7 +2,7 @@
 // which is also the name we can use when referring to the target from Java.
 @file:JvmName("CustomUtils")
 
-package com.sample.mvvm.retrofit.utils
+package com.mvvm.retrofit.utils
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

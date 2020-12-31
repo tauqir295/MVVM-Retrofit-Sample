@@ -1,4 +1,4 @@
-package com.sample.mvvm.retrofit
+package com.mvvm.retrofit
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject

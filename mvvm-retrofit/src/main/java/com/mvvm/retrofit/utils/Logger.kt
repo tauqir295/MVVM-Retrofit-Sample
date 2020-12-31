@@ -1,7 +1,7 @@
-package com.sample.mvvm.retrofit.utils
+package com.mvvm.retrofit.utils
 
 import android.util.Log
-import com.sample.mvvm.retrofit.BuildConfig
+import com.mvvm.retrofit.BuildConfig
 
 object Logger {
 

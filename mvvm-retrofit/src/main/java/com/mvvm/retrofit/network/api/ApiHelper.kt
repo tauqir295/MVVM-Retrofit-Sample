@@ -1,6 +1,6 @@
-package com.sample.mvvm.retrofit.network.api
+package com.mvvm.retrofit.network.api
 
-import com.sample.mvvm.retrofit.network.model.User
+import com.mvvm.retrofit.network.model.User
 import retrofit2.Response
 
 interface ApiHelper {
