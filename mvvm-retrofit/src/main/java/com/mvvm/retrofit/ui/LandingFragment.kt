@@ -46,7 +46,7 @@ class LandingFragment : Fragment() {
 
                 }
                 Status.LOADING -> {
-                    Logger.d("LandingFragment LOADING", it.message.toString())
+                    Logger.d("LandingFragment LOADING", "LOADING")
 
                 }
                 Status.ERROR -> {

@@ -20,7 +20,7 @@ fun Fragment.replaceWithNextFragment(
     containerID:Int,
     fragmentManager: FragmentManager?,
     fragment: Fragment,
-    arguments: Bundle?,
+    arguments: Bundle? = null,
     addToBackStack: Boolean = true
 ) {
     arguments.let {
