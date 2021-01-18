@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="cat"
+            type="com.mvvm.retrofit.network.model.Cat" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimens_16dp"
+        android:background="@drawable/round_corner">
+
+        <ImageView
+            android:id="@+id/catImageView"
+            android:layout_width="@dimen/dimens_240dp"
+            android:layout_height="@dimen/dimens_240dp"
+            android:layout_margin="@dimen/dimens_8dp"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@{cat.url}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/catIdTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.6"
+            android:background="@color/black"
+            android:padding="@dimen/dimens_16dp"
+            android:layout_margin="@dimen/dimens_8dp"
+            android:text="@{`actual size - ` + cat.width + ` * ` + cat.height}"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

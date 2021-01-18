@@ -16,8 +16,8 @@ import androidx.fragment.app.FragmentManager
  * extension method for navigating to other fragment
  *
  */
-fun Fragment.replaceWithNextFragment(
-    containerID:Int,
+fun replaceWithNextFragment(
+    containerID: Int,
     fragmentManager: FragmentManager?,
     fragment: Fragment,
     arguments: Bundle? = null,
@@ -36,5 +36,4 @@ fun Fragment.replaceWithNextFragment(
             commit()
         }
     }
-
 }
