@@ -3,23 +3,34 @@ package com.mvvm.retrofit.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mvvm.retrofit.databinding.CatGridItemBinding
 import com.mvvm.retrofit.databinding.CatListItemBinding
 import com.mvvm.retrofit.network.model.Cat
 
 /**
  * [RecyclerView.Adapter] that displays a [Cat].
  */
-class CatRecyclerViewAdapter: RecyclerView.Adapter<CatRecyclerViewAdapter.CatViewHolder>() {
+class CatRecyclerViewAdapter(private val layoutManager: GridLayoutManager) : RecyclerView.Adapter<CatRecyclerViewAdapter.BaseViewHolder>() {
 
     private var catList = ArrayList<Cat>()
     private var mOnItemClickListener: OnRecyclerItemClickListener? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
-        return CatViewHolder.from(parent)
+    // construction method for initiating variables
+    companion object {
+        const val LIST = 0
+        const val GRID = 1
     }
 
-    override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+        return when(viewType) {
+            LIST -> CatViewHolder.from(parent)
+            else -> CatGridViewHolder.from(parent)
+        }
+    }
+
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         val cat = catList[position]
         holder.onBind(cat)
         holder.itemView.setOnClickListener {
@@ -31,7 +42,12 @@ class CatRecyclerViewAdapter: RecyclerView.Adapter<CatRecyclerViewAdapter.CatVie
 
     override fun getItemId(position: Int): Long = position.toLong()
 
-    override fun getItemViewType(position: Int): Int = position
+    override fun getItemViewType(position: Int): Int {
+        return if (layoutManager.spanCount == 1)
+            LIST
+        else
+            GRID
+    }
 
     /**
      * adding the cat list received from to adapter
@@ -51,8 +67,7 @@ class CatRecyclerViewAdapter: RecyclerView.Adapter<CatRecyclerViewAdapter.CatVie
         mOnItemClickListener = listener
     }
 
-    class CatViewHolder (private val binding: CatListItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class CatViewHolder(private val binding: CatListItemBinding) : BaseViewHolder(binding.root) {
 
         companion object {
             fun from(parent: ViewGroup): CatViewHolder {
@@ -62,10 +77,31 @@ class CatRecyclerViewAdapter: RecyclerView.Adapter<CatRecyclerViewAdapter.CatVie
             }
         }
 
-        fun onBind(cat: Cat) {
+        override fun onBind(cat: Cat) {
             binding.cat = cat
             binding.executePendingBindings()
         }
+    }
+
+
+    class CatGridViewHolder(private val binding: CatGridItemBinding) : BaseViewHolder(binding.root) {
+
+        companion object {
+            fun from(parent: ViewGroup): CatGridViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = CatGridItemBinding.inflate(layoutInflater, parent, false)
+                return CatGridViewHolder(binding)
+            }
+        }
+
+        override fun onBind(cat: Cat) {
+            binding.cat = cat
+            binding.executePendingBindings()
+        }
+    }
+
+    abstract class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        abstract fun onBind(cat: Cat)
     }
 
     /**

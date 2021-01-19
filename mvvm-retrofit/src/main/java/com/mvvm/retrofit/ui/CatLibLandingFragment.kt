@@ -7,11 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.SwitchCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import com.mvvm.retrofit.R
 import com.mvvm.retrofit.databinding.LandingFragmentBinding
 import com.mvvm.retrofit.network.model.Cat
@@ -24,8 +27,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class CatLibLandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemClickListener {
 
     private val viewModelCatLib: CatLibLandingViewModel by viewModels()
-    private val adapter = CatRecyclerViewAdapter()
+    private lateinit var adapter: CatRecyclerViewAdapter
     private lateinit var binding: LandingFragmentBinding
+    private lateinit var layoutManager: GridLayoutManager
 
     companion object {
         fun newInstance() = CatLibLandingFragment()
@@ -37,6 +41,10 @@ class CatLibLandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemC
     ): View {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.landing_fragment, container, false)
+
+        layoutManager = GridLayoutManager(requireContext(), 1)
+        adapter = CatRecyclerViewAdapter(layoutManager)
+        binding.catListRv.layoutManager = layoutManager
         binding.catListRv.adapter = adapter
 
         adapter.setOnItemClickListener(this)
@@ -56,6 +64,15 @@ class CatLibLandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemC
         requireActivity().findViewById<ImageView>(R.id.toolbarImage).setOnClickListener {
             requireActivity().onBackPressed()
         }
+
+        requireActivity().findViewById<SwitchCompat>(R.id.switchButton).setOnCheckedChangeListener { _, isChecked: Boolean ->
+
+            switchBetweenGridListLayout(if (isChecked) {
+                2
+            } else {
+                1
+            })
+        }
     }
 
     private fun setupObserver() {
@@ -63,11 +80,10 @@ class CatLibLandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemC
             when (it.status) {
                 Status.SUCCESS -> {
                     it.data?.let { catList ->
-
-                        Logger.d("LandingFragment SUCCESS", catList.toString())
-
                         binding.progressBar.visibility = View.GONE
                         adapter.updateCatList(catList)
+
+                        requireActivity().findViewById<LinearLayout>(R.id.switchContainer).visibility = View.VISIBLE
                     }
 
                 }
@@ -84,6 +100,11 @@ class CatLibLandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemC
                 }
             }
         })
+    }
+
+    private fun switchBetweenGridListLayout(spanCount: Int) {
+        layoutManager.spanCount = spanCount
+        adapter.notifyItemRangeChanged(0, adapter.itemCount)
     }
 
     override fun onItemClick(item: View?, cat: Cat) {
