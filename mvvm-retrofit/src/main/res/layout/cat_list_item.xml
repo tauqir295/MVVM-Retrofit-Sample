@@ -12,35 +12,43 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimens_16dp"
-        android:background="@drawable/round_corner">
+        android:layout_margin="@dimen/dimens_16dp" >
 
-        <ImageView
-            android:id="@+id/catImageView"
-            android:layout_width="@dimen/dimens_240dp"
-            android:layout_height="@dimen/dimens_240dp"
-            android:layout_margin="@dimen/dimens_8dp"
-            android:contentDescription="@null"
-            android:scaleType="centerCrop"
-            android:src="@{cat.url}"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/dimens_8dp"
+            app:cardCornerRadius="@dimen/dimens_8dp"
+            app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="#B2B4B5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/catIdTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:alpha="0.6"
-            android:background="@color/black"
-            android:padding="@dimen/dimens_16dp"
-            android:layout_margin="@dimen/dimens_8dp"
-            android:text="@{`actual size - ` + cat.width + ` * ` + cat.height}"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <ImageView
+                android:id="@+id/catImageView"
+                android:layout_width="@dimen/dimens_340dp"
+                android:layout_height="@dimen/dimens_340dp"
+                android:layout_margin="@dimen/dimens_8dp"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:src="@{cat.url}" />
+
+            <TextView
+                android:id="@+id/catIdTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_margin="@dimen/dimens_8dp"
+                android:alpha="0.6"
+                android:background="@drawable/round_corner"
+                android:backgroundTint="@color/black"
+                android:padding="@dimen/dimens_16dp"
+                android:text="@{`actual size - ` + cat.width + ` * ` + cat.height}"
+                android:textColor="@color/white" />
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

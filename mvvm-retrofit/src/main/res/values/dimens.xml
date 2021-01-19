@@ -5,4 +5,5 @@
     <dimen name="dimens_120dp">120dp</dimen>
     <dimen name="dimens_8dp">8dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="dimens_340dp">340dp</dimen>
 </resources>
