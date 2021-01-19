@@ -68,7 +68,7 @@ class CatLibLandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemC
         requireActivity().findViewById<SwitchCompat>(R.id.switchButton).setOnCheckedChangeListener { _, isChecked: Boolean ->
 
             switchBetweenGridListLayout(if (isChecked) {
-                2
+                3
             } else {
                 1
             })
