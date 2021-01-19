@@ -1,13 +1,18 @@
 package com.sample.mvvm.retrofit
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import com.mvvm.retrofit.ui.LandingFragment
-import com.mvvm.retrofit.utils.replaceWithNextFragment
+import com.bumptech.glide.Glide
+import com.mvvm.retrofit.ui.CatLibLandingActivity
+import com.mvvm.retrofit.utils.CAT_URL
+import com.mvvm.retrofit.utils.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -15,7 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint
  * Use the [MainFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-
 @AndroidEntryPoint
 class MainFragment : Fragment() {
     override fun onCreateView(
@@ -48,10 +52,23 @@ class MainFragment : Fragment() {
     }
 
     private fun navigateToCatJourneyLibrary() {
-        replaceWithNextFragment(
-            this.id,
-            requireActivity().supportFragmentManager,
-            LandingFragment.newInstance()
-        )
+        startActivityForResult(Intent((requireActivity() as MainActivity), CatLibLandingActivity::class.java), 1234)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1234 && resultCode == RESULT_OK && data != null) {
+            data.getStringExtra(CAT_URL)?.let {
+                Logger.d("Main fragment", it)
+                requireActivity().findViewById<ImageView>(R.id.catImageView).apply {
+                    if (it.isNotEmpty()) {
+                        Glide.with(requireContext())
+                            .load(it)
+                            .placeholder(com.mvvm.retrofit.R.drawable.placeholder_image)
+                            .into(this)
+                    }
+                }
+            }
+        }
     }
 }

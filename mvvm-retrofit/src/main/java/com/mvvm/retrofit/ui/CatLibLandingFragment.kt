@@ -1,33 +1,34 @@
 package com.mvvm.retrofit.ui
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.mvvm.retrofit.R
 import com.mvvm.retrofit.databinding.LandingFragmentBinding
-import com.mvvm.retrofit.detail.CatDetailFragment
 import com.mvvm.retrofit.network.model.Cat
-import com.mvvm.retrofit.utils.CAT_DETAILS
+import com.mvvm.retrofit.utils.CAT_URL
 import com.mvvm.retrofit.utils.Logger
 import com.mvvm.retrofit.utils.Status
-import com.mvvm.retrofit.utils.replaceWithNextFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemClickListener {
+class CatLibLandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemClickListener {
 
-    private val viewModel: LandingViewModel by viewModels()
+    private val viewModelCatLib: CatLibLandingViewModel by viewModels()
     private val adapter = CatRecyclerViewAdapter()
     private lateinit var binding: LandingFragmentBinding
 
     companion object {
-        fun newInstance() = LandingFragment()
+        fun newInstance() = CatLibLandingFragment()
     }
 
     override fun onCreateView(
@@ -50,6 +51,7 @@ class LandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemClickLi
         super.onViewCreated(view, savedInstanceState)
 
         setupObserver()
+        requireActivity().findViewById<TextView>(R.id.toolbarTitle).text = getString(R.string.cat_list)
 
         requireActivity().findViewById<ImageView>(R.id.toolbarImage).setOnClickListener {
             requireActivity().onBackPressed()
@@ -57,7 +59,7 @@ class LandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemClickLi
     }
 
     private fun setupObserver() {
-        viewModel.catList.observe(viewLifecycleOwner, Observer {
+        viewModelCatLib.catList.observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 Status.SUCCESS -> {
                     it.data?.let { catList ->
@@ -85,14 +87,12 @@ class LandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemClickLi
     }
 
     override fun onItemClick(item: View?, cat: Cat) {
-        replaceWithNextFragment(
-            this.id,
-            requireActivity().supportFragmentManager,
-            CatDetailFragment.newInstance(),
-            Bundle().apply {
-                putParcelable(CAT_DETAILS, cat)
-            }
-        )
-    }
 
+        (requireActivity() as CatLibLandingActivity).apply {
+            val resultIntent = Intent()
+            resultIntent.putExtra(CAT_URL, cat.url)
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
+        }
+    }
 }

@@ -1,6 +1,5 @@
 package com.mvvm.retrofit.ui
 
-import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.mvvm.retrofit.network.model.Cat
@@ -9,12 +8,10 @@ import com.mvvm.retrofit.utils.NetworkHelper
 import com.mvvm.retrofit.utils.Resource
 import kotlinx.coroutines.launch
 
-class LandingViewModel @ViewModelInject constructor(
+class CatLibLandingViewModel @ViewModelInject constructor(
     private val mainRepository: MainRepository,
-    private val networkHelper: NetworkHelper,
-    @Assisted private val savedStateHandle: SavedStateHandle
-) :
-    ViewModel() {
+    private val networkHelper: NetworkHelper
+) : ViewModel() {
 
     private val _cats = MutableLiveData<Resource<List<Cat>>>()
     val catList: LiveData<Resource<List<Cat>>>
