@@ -1,10 +1,10 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.MVVMRetrofit" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.MVVMRetrofit" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">#20910D</item>
     </style>
 
     <style name="roundedImageView" parent="">
