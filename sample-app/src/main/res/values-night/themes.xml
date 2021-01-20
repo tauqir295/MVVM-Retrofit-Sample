@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.MVVMRetrofitSample" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
@@ -9,8 +9,4 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.MVVMRetrofitSample.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 </resources>

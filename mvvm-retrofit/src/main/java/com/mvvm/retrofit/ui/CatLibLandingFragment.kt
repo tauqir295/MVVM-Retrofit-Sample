@@ -76,7 +76,7 @@ class CatLibLandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemC
     }
 
     private fun setupObserver() {
-        viewModelCatLib.catList.observe(viewLifecycleOwner, Observer {
+        viewModelCatLib.catList.observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
                     it.data?.let { catList ->
