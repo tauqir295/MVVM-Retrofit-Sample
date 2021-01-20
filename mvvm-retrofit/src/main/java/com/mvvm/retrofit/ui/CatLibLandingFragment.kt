@@ -9,11 +9,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.SwitchCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mvvm.retrofit.R
 import com.mvvm.retrofit.databinding.LandingFragmentBinding
@@ -87,15 +87,18 @@ class CatLibLandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemC
                     }
 
                 }
+
                 Status.LOADING -> {
                     Logger.d("LandingFragment LOADING", "LOADING")
                     binding.progressBar.visibility = View.VISIBLE
 
                 }
+
                 Status.ERROR -> {
                     //Handle Error
                     Logger.d("LandingFragment ERROR", it.message.toString())
                     binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
 
                 }
             }

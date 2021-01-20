@@ -21,7 +21,6 @@
             android:elevation="@dimen/dimens_8dp"
             app:cardCornerRadius="@dimen/dimens_8dp"
             app:cardUseCompatPadding="true"
-            app:cardBackgroundColor="#B2B4B5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +30,7 @@
                 android:id="@+id/catImageView"
                 android:layout_width="@dimen/dimens_340dp"
                 android:layout_height="@dimen/dimens_340dp"
-                android:layout_margin="@dimen/dimens_8dp"
+                android:layout_margin="@dimen/dimens_4dp"
                 android:contentDescription="@null"
                 android:scaleType="centerCrop"
                 android:src="@{cat.url}" />

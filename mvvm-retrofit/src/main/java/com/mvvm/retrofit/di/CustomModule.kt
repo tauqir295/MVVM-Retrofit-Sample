@@ -24,7 +24,6 @@ object CustomModule {
 
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
-
         return if (BuildConfig.DEBUG) {
             val loggingInterceptor = HttpLoggingInterceptor()
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)

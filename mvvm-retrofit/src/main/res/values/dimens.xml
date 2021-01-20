@@ -7,4 +7,5 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="dimens_340dp">340dp</dimen>
     <dimen name="dimens_90dp">90dp</dimen>
+    <dimen name="dimens_4dp">4dp</dimen>
 </resources>
