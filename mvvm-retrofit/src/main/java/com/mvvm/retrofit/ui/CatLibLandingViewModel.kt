@@ -25,7 +25,7 @@ class CatLibLandingViewModel @ViewModelInject constructor(
         fetchCatList()
     }
 
-    private fun fetchCatList(limit: Int = 20, page: Int = 1) {
+    private fun fetchCatList(limit: Int = 30, page: Int = 1) {
         viewModelScope.launch {
             _cats.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {

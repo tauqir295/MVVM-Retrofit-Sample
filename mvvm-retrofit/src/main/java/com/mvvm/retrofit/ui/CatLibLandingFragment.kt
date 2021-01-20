@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.appcompat.widget.SwitchCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.mvvm.retrofit.R
 import com.mvvm.retrofit.databinding.LandingFragmentBinding
 import com.mvvm.retrofit.network.model.Cat
@@ -64,7 +64,7 @@ class CatLibLandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemC
             requireActivity().onBackPressed()
         }
 
-        requireActivity().findViewById<SwitchCompat>(R.id.switchButton).setOnCheckedChangeListener { _, isChecked: Boolean ->
+        requireActivity().findViewById<SwitchMaterial>(R.id.switchButton).setOnCheckedChangeListener { _, isChecked: Boolean ->
 
             switchBetweenGridListLayout(if (isChecked) {
                 3
