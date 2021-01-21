@@ -24,8 +24,9 @@ class CatRecyclerViewAdapter(private val layoutManager: GridLayoutManager) : Rec
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+        // on the basis of variable used, we can change grid or list
         return when(viewType) {
-            LIST -> CatViewHolder.from(parent)
+            LIST -> CatListViewHolder.from(parent)
             else -> CatGridViewHolder.from(parent)
         }
     }
@@ -43,7 +44,7 @@ class CatRecyclerViewAdapter(private val layoutManager: GridLayoutManager) : Rec
     override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getItemViewType(position: Int): Int {
-        return if (layoutManager.spanCount == 1)
+        return if (layoutManager.spanCount == 1) // on the basis [spanCount], list or grid is shown
             LIST
         else
             GRID
@@ -51,7 +52,7 @@ class CatRecyclerViewAdapter(private val layoutManager: GridLayoutManager) : Rec
 
     /**
      * adding the cat list received from to adapter
-     * @param:list - used to populate the adapter items
+     * @param: [list] - used to populate the adapter items
      */
     fun updateCatList(list: List<Cat>) {
         catList = list as ArrayList<Cat>
@@ -61,19 +62,23 @@ class CatRecyclerViewAdapter(private val layoutManager: GridLayoutManager) : Rec
     /**
      * initiating the listener
      *
-     * @param:listener - use this to assign the class level listener
+     * @param:[listener] - use this to assign the class level listener
      */
     fun setOnItemClickListener(listener: OnRecyclerItemClickListener) {
         mOnItemClickListener = listener
     }
 
-    class CatViewHolder(private val binding: CatListItemBinding) : BaseViewHolder(binding.root) {
+    /**
+     * View holder class for showing list
+     * @param - [CatListItemBinding] - variable use for binding the UI with adapter
+     */
+    class CatListViewHolder(private val binding: CatListItemBinding) : BaseViewHolder(binding.root) {
 
         companion object {
-            fun from(parent: ViewGroup): CatViewHolder {
+            fun from(parent: ViewGroup): CatListViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = CatListItemBinding.inflate(layoutInflater, parent, false)
-                return CatViewHolder(binding)
+                return CatListViewHolder(binding)
             }
         }
 
@@ -83,7 +88,10 @@ class CatRecyclerViewAdapter(private val layoutManager: GridLayoutManager) : Rec
         }
     }
 
-
+    /**
+     * View holder class for showing grid
+     * @param - [CatGridItemBinding] - variable use for binding the UI with adapter
+     */
     class CatGridViewHolder(private val binding: CatGridItemBinding) : BaseViewHolder(binding.root) {
 
         companion object {
@@ -100,6 +108,10 @@ class CatRecyclerViewAdapter(private val layoutManager: GridLayoutManager) : Rec
         }
     }
 
+    /**
+     * Base view holder class
+     * @param - [View] - variable use for binding the UI with adapter
+     */
     abstract class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         abstract fun onBind(cat: Cat)
     }

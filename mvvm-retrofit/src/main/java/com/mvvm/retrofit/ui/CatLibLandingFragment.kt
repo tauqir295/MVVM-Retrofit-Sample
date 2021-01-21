@@ -22,6 +22,9 @@ import com.mvvm.retrofit.utils.Logger
 import com.mvvm.retrofit.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Landing screen for selecting the cat
+ */
 @AndroidEntryPoint
 class CatLibLandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemClickListener {
 
@@ -39,6 +42,7 @@ class CatLibLandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemC
         savedInstanceState: Bundle?
     ): View {
 
+        // data binding is used
         binding = DataBindingUtil.inflate(inflater, R.layout.landing_fragment, container, false)
 
         layoutManager = GridLayoutManager(requireContext(), 1)
@@ -65,7 +69,6 @@ class CatLibLandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemC
         }
 
         requireActivity().findViewById<SwitchMaterial>(R.id.switchButton).setOnCheckedChangeListener { _, isChecked: Boolean ->
-
             switchBetweenGridListLayout(if (isChecked) {
                 3
             } else {
@@ -74,6 +77,9 @@ class CatLibLandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemC
         }
     }
 
+    /**
+     * Observe update on view model live data
+     */
     private fun setupObserver() {
         viewModelCatLib.catList.observe(viewLifecycleOwner, {
             when (it.status) {
@@ -104,11 +110,22 @@ class CatLibLandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemC
         })
     }
 
+    /**
+     * switch between list or grid view of items
+     * @param - [spanCount] - this variable tells layout manager about number of items in a row
+     * in grid
+     */
     private fun switchBetweenGridListLayout(spanCount: Int) {
         layoutManager.spanCount = spanCount
         adapter.notifyItemRangeChanged(0, adapter.itemCount)
     }
 
+    /**
+     * handles click of item in grid/list and pass to the calling activity
+     *
+     * @param - [item] - view which is clicked
+     * @param - [cat] - cat list item which is clicked
+     */
     override fun onItemClick(item: View?, cat: Cat) {
 
         (requireActivity() as CatLibLandingActivity).apply {

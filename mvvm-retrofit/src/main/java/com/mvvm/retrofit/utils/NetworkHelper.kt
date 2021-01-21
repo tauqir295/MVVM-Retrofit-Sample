@@ -5,6 +5,10 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 
+/**
+ * Helper class for check internet service
+ * @param - [Context] - context is used for getting system service
+ */
 class NetworkHelper constructor(private val context: Context) {
 
     fun isNetworkConnected(): Boolean {

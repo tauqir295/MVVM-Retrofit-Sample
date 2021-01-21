@@ -51,10 +51,16 @@ class MainFragment : Fragment() {
         }
     }
 
+    /**
+     * navigate to cat lib for fetching the cat image path.
+     */
     private fun navigateToCatJourneyLibrary() {
         startActivityForResult(Intent((requireActivity() as MainActivity), CatLibLandingActivity::class.java), 1234)
     }
 
+    /**
+     * On the basis of data received from cat lib the image is loaded on the image view
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1234 && resultCode == RESULT_OK && data != null) {

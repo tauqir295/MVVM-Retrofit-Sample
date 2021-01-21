@@ -1,5 +1,6 @@
 package com.mvvm.retrofit.utils
 
+// data class for handling the response from server
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
 
     companion object {

@@ -48,7 +48,7 @@ object CustomModule {
     ): Retrofit =
         Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create())
-            .baseUrl("https://api.thecatapi.com/")
+            .baseUrl("https://api.thecatapi.com/") //base url for api callig
             .client(okHttpClient)
             .build()
 

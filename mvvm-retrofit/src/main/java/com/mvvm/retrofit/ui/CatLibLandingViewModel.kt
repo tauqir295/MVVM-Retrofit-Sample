@@ -12,6 +12,9 @@ import com.mvvm.retrofit.utils.Resource
 import kotlinx.coroutines.launch
 import java.io.IOException
 
+/**
+ * View model class used for updating the UI
+ */
 class CatLibLandingViewModel @ViewModelInject constructor(
     private val mainRepository: MainRepository,
     private val networkHelper: NetworkHelper
@@ -25,6 +28,11 @@ class CatLibLandingViewModel @ViewModelInject constructor(
         fetchCatList()
     }
 
+    /**
+     * Fetch the data from API
+     * @param - [limit] - variable used for getting number of records
+     * @param - [page] - variable used for getting number of pages
+     */
     private fun fetchCatList(limit: Int = 30, page: Int = 1) {
         viewModelScope.launch {
             _cats.postValue(Resource.loading(null))
