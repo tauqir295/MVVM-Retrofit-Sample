@@ -168,7 +168,8 @@ class CatLibLandingFragment : Fragment(), CatRecyclerViewAdapter.OnRecyclerItemC
 
     override fun onLoadMore() {
         activity?.let {
-            viewModelCatLib.fetchCatList(10, pageCount++)
+            // fetching only fewer elements inorder to manage the data consumption for load more only
+            viewModelCatLib.fetchCatList(9, pageCount++)
         }
     }
 }
