@@ -33,7 +33,7 @@ class CatLibLandingViewModel @ViewModelInject constructor(
      * @param - [limit] - variable used for getting number of records
      * @param - [page] - variable used for getting number of pages
      */
-    private fun fetchCatList(limit: Int = 30, page: Int = 1) {
+    fun fetchCatList(limit: Int = 12, page: Int = 0) {
         viewModelScope.launch {
             _cats.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {

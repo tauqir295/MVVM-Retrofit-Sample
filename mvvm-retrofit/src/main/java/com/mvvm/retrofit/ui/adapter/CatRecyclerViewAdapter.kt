@@ -1,4 +1,4 @@
-package com.mvvm.retrofit.ui
+package com.mvvm.retrofit.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -55,7 +55,7 @@ class CatRecyclerViewAdapter(private val layoutManager: GridLayoutManager) : Rec
      * @param: [list] - used to populate the adapter items
      */
     fun updateCatList(list: List<Cat>) {
-        catList = list as ArrayList<Cat>
+        catList.addAll(list)
         notifyDataSetChanged()
     }
 
