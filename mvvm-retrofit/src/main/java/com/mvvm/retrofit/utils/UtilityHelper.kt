@@ -12,10 +12,8 @@ import com.mvvm.retrofit.R
  */
 @BindingAdapter("android:src")
 fun loadImage(view: ImageView, url: String?) {
-    if (!url.isNullOrEmpty()) {
-        Glide.with(view.context)
-            .load(url)
-            .placeholder(R.drawable.placeholder_image)
-            .into(view)
-    }
+    Glide.with(view.context)
+        .load(url)
+        .placeholder(R.drawable.placeholder_image)
+        .into(view)
 }
