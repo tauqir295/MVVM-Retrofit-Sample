@@ -38,13 +38,15 @@
             android:layout_below="@id/appBarLayout"
             android:orientation="horizontal"
             android:visibility="gone"
-            android:layout_margin="@dimen/dimens_16dp">
+            android:elevation="@dimen/dimens_8dp"
+            android:background="@drawable/custom_border">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/list"
                 android:textColor="@color/black"
+                android:textSize="@dimen/dimens_16sp"
                 android:layout_marginStart="@dimen/dimens_16dp"/>
 
             <com.google.android.material.switchmaterial.SwitchMaterial
@@ -59,6 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/grid"
+                android:textSize="@dimen/dimens_16sp"
                 android:textColor="@color/black"/>
 
         </LinearLayout>
