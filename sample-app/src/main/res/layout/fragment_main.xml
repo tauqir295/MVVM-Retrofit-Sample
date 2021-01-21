@@ -7,6 +7,16 @@
     tools:context=".MainFragment"
     android:layout_margin="16dp">
 
+    <ImageView
+        android:id="@+id/catImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/placeholder_image"/>
+
     <Button
         android:id="@+id/launchCatJourneyBtn"
         android:layout_width="wrap_content"
@@ -14,20 +24,8 @@
         android:text="@string/launch_cat_journey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/catImageView"
+        android:layout_marginTop="@dimen/dimens_16dp"
         android:textAllCaps="false"/>
-
-    <ImageView
-        android:id="@+id/catImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="@dimen/dimens_360dp"
-        android:minHeight="@dimen/dimens_360dp"
-        android:text="@string/launch_cat_journey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/launchCatJourneyBtn"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@null" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
