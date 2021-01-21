@@ -2,13 +2,18 @@ package com.sample.mvvm.retrofit
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
+import com.mvvm.retrofit.ui.adapter.CatRecyclerViewAdapter
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
@@ -29,23 +34,25 @@ class MainActivityTest {
 
     @Test
     fun mainActivityTest() {
-        val appCompatButton = onView(
+        onView(
             allOf(
-                withId(R.id.launchCatJourneyBtn), withText("Choose image"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.container),
-                        0
-                    ),
-                    0
-                ),
+                withId(R.id.catImageView),
+                withParent(withParent(withId(R.id.container))),
                 isDisplayed()
             )
-        )
-        appCompatButton.perform(click())
+        ).check(matches(isDisplayed()))
+
+        onView(
+            allOf(
+                withId(R.id.launchCatJourneyBtn), withText("Choose image"), isDisplayed()
+            )
+        ).perform(click())
         Thread.sleep(5000)
 
-        val switch_ = onView(
+        onView(withId(R.id.catListRv))
+            .perform(scrollToPosition<CatRecyclerViewAdapter.BaseViewHolder>(5))
+
+        onView(
             allOf(
                 withId(R.id.switchButton),
                 withParent(
@@ -56,40 +63,64 @@ class MainActivityTest {
                 ),
                 isDisplayed()
             )
-        )
-        switch_.check(matches(isDisplayed()))
+        ).check(matches(isDisplayed()))
 
-        val switchCompat = onView(
+        onView(
             allOf(
                 withId(R.id.switchButton),
-                childAtPosition(
+                isDisplayed()
+            )
+        ).perform(click())
+
+        onView(
+            allOf(
+                withId(R.id.switchButton),
+                withParent(
                     allOf(
                         withId(R.id.switchContainer),
+                        withParent(IsInstanceOf.instanceOf(android.widget.RelativeLayout::class.java))
+                    )
+                ),
+                isDisplayed()
+            )
+        ).check(matches(isDisplayed()))
+
+        onView(
+            allOf(
+                withId(R.id.catListRv)
+            )
+        ).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                0,
+                click()
+            )
+        )
+
+        onView(
+            allOf(
+                withId(R.id.launchCatJourneyBtn), withText("Choose image"),
+                isDisplayed()
+            )
+        ).perform(click())
+
+        Thread.sleep(5000)
+
+        onView(
+            allOf(
+                childAtPosition(
+                    allOf(
+                        withId(R.id.topAppBar),
                         childAtPosition(
-                            withClassName(`is`("android.widget.RelativeLayout")),
-                            2
+                            withId(R.id.appBarLayout),
+                            0
                         )
                     ),
                     1
                 ),
                 isDisplayed()
             )
-        )
-        switchCompat.perform(click())
+        ).perform(click())
 
-        val switch_3 = onView(
-            allOf(
-                withId(R.id.switchButton),
-                withParent(
-                    allOf(
-                        withId(R.id.switchContainer),
-                        withParent(IsInstanceOf.instanceOf(android.widget.RelativeLayout::class.java))
-                    )
-                ),
-                isDisplayed()
-            )
-        )
-        switch_3.check(matches(isDisplayed()))
     }
 
     private fun childAtPosition(
