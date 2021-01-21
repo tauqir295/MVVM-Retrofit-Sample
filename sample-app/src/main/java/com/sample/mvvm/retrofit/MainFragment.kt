@@ -8,11 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.mvvm.retrofit.ui.CatLibLandingActivity
 import com.mvvm.retrofit.utils.CAT_URL
 import com.mvvm.retrofit.utils.Logger
+import com.sample.mvvm.retrofit.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -22,12 +25,19 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class MainFragment : Fragment() {
+
+    private lateinit var binding: FragmentMainBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+
+        // data binding is used
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return binding.root
     }
 
     companion object {
@@ -68,10 +78,7 @@ class MainFragment : Fragment() {
                 Logger.d("Main fragment", it)
                 requireActivity().findViewById<ImageView>(R.id.catImageView).apply {
                     if (it.isNotEmpty()) {
-                        Glide.with(requireContext())
-                            .load(it)
-                            .placeholder(com.mvvm.retrofit.R.drawable.placeholder_image)
-                            .into(this)
+                        binding.url = it
                     }
                 }
             }
